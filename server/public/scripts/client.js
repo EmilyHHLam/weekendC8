@@ -20,10 +20,6 @@ $(document).ready(function(){
     var input ='' ;
     var curClicked = curNumb ++;
 
-    // input = $(this).data("id");
-    // firstNumber +=  input;
-    //
-    // console.log(firstNumber);
     input = $(this).data("id");
 
     if (method === '') {
@@ -42,7 +38,7 @@ $(document).ready(function(){
 
   //get the method
   $('.operationContainer').on('click', '.mathButton', function() {
-  
+
      method = $(this).data('id');
      $('.resultContainer').append('<span>' + $(this).text() + '</span>');
    } ); //end of method function
@@ -54,6 +50,7 @@ $(document).ready(function(){
       inputNumberNMethod.firstNumber = firstNumber;
       inputNumberNMethod.secondNumber =  secondNumber;
       inputNumberNMethod.method   = method;
+      $('.resultContainer').empty();
       firstNumber = '';
       secondNumber= '';
       method='';
@@ -74,7 +71,7 @@ $(document).ready(function(){
    });
 
    $('.operationContainer').on('click', '.clear', function() {
-
+     $('.resultContainer').empty();
      firstNumber = '';
      secondNumber= '';
      method='';
@@ -83,25 +80,3 @@ $(document).ready(function(){
 
 
 }); //end doc.ready.function
-
-
-
-//
-// function getResult() {
-//    $.ajax( {
-//     type: 'GET',
-//     url: '/result',
-//     sucess: function(response) {
-//       response.log("here comes result: ");
-//       console.log(response);
-//       displayResult();
-//     }
-//   });
-//
-// }
-// function displayResult(result) {
-//
-//   $("#result").empty();
-//   console.log(result);
-//   $("#result").append("<span>" + result + "</span>");
-// }
