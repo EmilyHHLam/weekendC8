@@ -22,11 +22,13 @@ $(document).ready(function(){
     var input ='' ;
       //remove all in the result shown after number button clicked
     //isResult == true? than clear input and set to false
-console.log(isResult);
+// console.log(isResult);
+// console.log('2nd numb =' + secondNumber);
     if (isResult == true ) {
       $('.resultContainer').empty();
 
     }
+
 
     input = $(this).data("id");
 
@@ -41,6 +43,7 @@ console.log(isResult);
     }
 
 
+
   });  //end of get 2 numbers
 
   //get the method
@@ -53,10 +56,17 @@ console.log(isResult);
    //equal button click
    $('.operationContainer').on('click', '.equal', function() {
       isResult = true;
+
        var inputNumberNMethod = {};
       inputNumberNMethod.firstNumber = firstNumber;
       inputNumberNMethod.secondNumber =  secondNumber;
       inputNumberNMethod.method   = method;
+
+      //in case the button being clicked without having numbers
+      // if (method === ''){
+      //   $('.resultContainer').append('<span>Enter the number!</span>');
+      // }
+
       $('.resultContainer').empty();
       firstNumber = '';
       secondNumber= '';
