@@ -9,20 +9,31 @@ $(document).ready(function(){
           $(".numberContainer").append('<p></p>');
         }
   }//end of loop
-  var inputNumberNMethod = {};
-  var firstNumber =0;
-  var secondNumber=0;
+ var numberClick = '';
+  var firstNumber = '';
+  var secondNumber= '';
   var method='';
   //click number to get two numbers
   $('.numberContainer').on('click', '.number', function() {
-
+    var str;
+    var strInput = '';
+    var input ='' ;
     var curClicked = curNumb ++;
 
-    if (curClicked ===1) {
-        firstNumber = $(this).data("id");
+    // input = $(this).data("id");
+    // firstNumber +=  input;
+    //
+    // console.log(firstNumber);
+    input = $(this).data("id");
 
-    }else if (curClicked ===2) {
-      secondNumber= $(this).data("id");
+    if (method === '') {
+
+
+      firstNumber += input;
+      $('.resultContainer').append('<span>' + input +'</span>');
+    } else {
+      secondNumber += input;
+      $('.resultContainer').append('<span>' + input +'</span>');
 
     }
 
@@ -31,44 +42,66 @@ $(document).ready(function(){
 
   //get the method
   $('.operationContainer').on('click', '.mathButton', function() {
-     method = $(this).attr('id');
+  
+     method = $(this).data('id');
+     $('.resultContainer').append('<span>' + $(this).text() + '</span>');
    } ); //end of method function
 
    //equal button click
    $('.operationContainer').on('click', '.equal', function() {
 
+       var inputNumberNMethod = {};
       inputNumberNMethod.firstNumber = firstNumber;
-      inputNumberNMethod.secondNumber = secondNumber;
+      inputNumberNMethod.secondNumber =  secondNumber;
       inputNumberNMethod.method   = method;
+      firstNumber = '';
+      secondNumber= '';
+      method='';
     // //sending over the server
       $.ajax( {
         type: 'POST',
         url: '/operation',
         data: inputNumberNMethod,
-        sucess: function(response) {
+        success: function(response) {
           console.log("SUCCESS!");
-        getResult();
-        }
 
+          $('.resultContainer').append('<span>' + response.answer +'</span>');
+        //getResult();
+      }
 
-      }); //end of equal button clicked
+    }); //end of equal button clicked
 
    });
 
+   $('.operationContainer').on('click', '.clear', function() {
+
+     firstNumber = '';
+     secondNumber= '';
+     method='';
+   });
+
+
 
 }); //end doc.ready.function
-function getResult() {
-  $.ajax( {
-    type: 'GET',
-    url: '/result',
-    sucess: function(response) {
-      console.log(response);
-      displayResult();
-    }
-  });
-}
-function displayResult(result) {
-  $("#result").empty();
-  console.log(result);
-  $(".resultContainer").append("<span>" + result + "</span>");
-}
+
+
+
+//
+// function getResult() {
+//    $.ajax( {
+//     type: 'GET',
+//     url: '/result',
+//     sucess: function(response) {
+//       response.log("here comes result: ");
+//       console.log(response);
+//       displayResult();
+//     }
+//   });
+//
+// }
+// function displayResult(result) {
+//
+//   $("#result").empty();
+//   console.log(result);
+//   $("#result").append("<span>" + result + "</span>");
+// }
