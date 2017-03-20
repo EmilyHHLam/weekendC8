@@ -1,3 +1,9 @@
+var isResult = false;
+var numberClick = '';
+ var firstNumber = '';
+ var secondNumber= '';
+ var method='';
+
 $(document).ready(function(){
   console.log('JQuery sourced:');
   var curNumb=1;
@@ -9,17 +15,18 @@ $(document).ready(function(){
           $(".numberContainer").append('<p></p>');
         }
   }//end of loop
- var numberClick = '';
-  var firstNumber = '';
-  var secondNumber= '';
-  var method='';
+
   //click number to get two numbers
   $('.numberContainer').on('click', '.number', function() {
 
     var input ='' ;
+      //remove all in the result shown after number button clicked
+    //isResult == true? than clear input and set to false
+console.log(isResult);
+    if (isResult == true ) {
+      $('.resultContainer').empty();
 
-    //remove all in the result shown after number button clicked
-    //$('.resultContainer span').remove();
+    }
 
     input = $(this).data("id");
 
@@ -45,7 +52,7 @@ $(document).ready(function(){
 
    //equal button click
    $('.operationContainer').on('click', '.equal', function() {
-
+      isResult = true;
        var inputNumberNMethod = {};
       inputNumberNMethod.firstNumber = firstNumber;
       inputNumberNMethod.secondNumber =  secondNumber;
