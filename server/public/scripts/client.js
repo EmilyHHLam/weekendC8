@@ -15,15 +15,15 @@ $(document).ready(function(){
   var method='';
   //click number to get two numbers
   $('.numberContainer').on('click', '.number', function() {
-    var str;
-    var strInput = '';
+
     var input ='' ;
-    var curClicked = curNumb ++;
+
+    //remove all in the result shown after number button clicked
+    //$('.resultContainer span').remove();
 
     input = $(this).data("id");
 
     if (method === '') {
-
 
       firstNumber += input;
       $('.resultContainer').append('<span>' + input +'</span>');
